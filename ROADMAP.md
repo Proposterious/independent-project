@@ -5,11 +5,12 @@
 ### Interactive Storytelling Robot (4a)
 
 #### Overview
+
 In this project, we aim to develop an interactive storytelling robot that engages children by narrating stories 
 and allowing them to interact with the narrative. The robot will utilize a combination of hardware and software 
 technologies to deliver personalized and immersive storytelling experiences.
 
-#### Technologies Required:
+#### Technologies Required
 
 - **Robotics Platform**: Select a suitable robotics platform (e.g., Raspberry Pi with motor controllers) to build 
 the physical structure of the storytelling robot.
