@@ -2,70 +2,53 @@
 
 ## Chat-GPT Generated Suggestions
 
-### Interactive Storytelling Robot (4a)
+### Interactive Storytelling Robot
 
 #### Overview
 
-In this project, we aim to develop an interactive storytelling robot that engages children by narrating stories\
-and allowing them to interact with the narrative. The robot will utilize a combination of hardware and software\
+In this project, we aim to develop an interactive storytelling robot that engages children by narrating stories  
+and allowing them to interact with the narrative. The robot will utilize a combination of hardware and software  
 technologies to deliver personalized and immersive storytelling experiences.
 
 #### Technologies Required
 
-- **Robotics Platform**: Select a suitable robotics platform (e.g., Raspberry Pi with motor controllers) to build\ The physical structure of the storytelling robot.
+- **Robotics Platform**: Select a suitable robotics platform (e.g., Raspberry Pi with motor controllers) to build   The physical structure of the storytelling robot.
   
-- **Speech Synthesis and Recognition**: Integrate speech synthesis for the robot to narrate stories and incorporate\
+- **Speech Synthesis and Recognition**: Integrate speech synthesis for the robot to narrate stories and incorporate  
 speech recognition to enable verbal interaction with children.
   
-- **Programming Environment**: Develop a programming interface to create and customize interactive storylines\
+- **Programming Environment**: Develop a programming interface to create and customize interactive storylines  
 for the robot, considering user-friendly design principles.
   
-- **Machine Learning for Personalization**: Implement machine learning algorithms to personalize the storytelling\
+- **Machine Learning for Personalization**: Implement machine learning algorithms to personalize the storytelling  
 experience based on the child's preferences and engagement levels.
   
-- **Sensors for Interaction**: Equip the robot with sensors (e.g., touch sensors) to enable physical interaction\
+- **Sensors for Interaction**: Equip the robot with sensors (e.g., touch sensors) to enable physical interaction  
 with children and trigger story events.
   
-- **Visual and Audio Elements**: Enhance the storytelling experience with visual and audio elements such as animated\
+- **Visual and Audio Elements**: Enhance the storytelling experience with visual and audio elements such as animated  
 displays, LED lights, and sound effects.
   
-- **Power Supply and Durability**: Ensure the robot has a reliable power supply and design it with durability\
+- **Power Supply and Durability**: Ensure the robot has a reliable power supply and design it with durability  
 to withstand interaction with children.
   
-- **Safety Features**: Implement safety features to protect children from potential hazards associated with\
+- **Safety Features**: Implement safety features to protect children from potential hazards associated with  
 interacting with the robot.
 
-### Interactive Art Installation (8b)
+#### My Interpretation of Requirements
 
-#### Overview
-This project involves creating an interactive art installation that responds to viewers' emotional expressions\
-in real-time, using facial recognition technology and dynamic visual elements. The installation aims to engage\
-viewers by reflecting their emotions through visual transformations.
+- **Robotics Platform**: Motor controllers and Micro controllers that serve different purposes
+- [ ] [scripts folder](project/hardware/scripts/INDEX.md) will be updated to contain
+  
+- **Speech Synthesis**: Use [OpenAI's Whisper](https://github.com/openai/whisper) to interpret voices and  
+then use a combination of scripts before coming up with a response.
 
-#### Technologies Required:
+- **Visual and Audio Elements**: Allow background music (that can be toggled on/off) and have adaptive LEDs
 
-- **Facial Recognition Software**: Utilize facial recognition algorithms to detect and analyze viewers' emotional\
-expressions captured by a camera or webcam.
-  
-- **Camera or Webcam**: Install a camera or webcam to capture live video footage of viewers' faces for facial\
-recognition.
-  
-- **Microcontroller or Single Board Computer**: Use a microcontroller (e.g., Arduino) or a single-board computer\
-(e.g., Raspberry Pi) to process facial recognition data and control visual elements.
-  
-- **LED Lights, Projectors, or Display Panels**: Implement visual elements (e.g., LED lights, projectors) that\
-change in response to detected emotions, creating dynamic visual effects.
-  
-- **Machine Learning Models**: Train machine learning models to recognize a range of emotions from facial expressions,\
-using libraries like TensorFlow or PyTorch.
-  
-- **Communication Protocols**: Set up communication protocols between the facial recognition system and hardware\
-controlling visual elements (e.g., serial communication, network protocols).
-  
-- **Power Supply**: Ensure the art installation has a reliable power supply to operate continuously, considering\
-power requirements of all components.
-  
-- **Enclosure and Mounting Hardware**: Design an enclosure to house hardware components and provide mounting hardware\
-for camera, lights, and other elements, considering durability and aesthetics.
+- **Power Supply and Durability**: Research the most reliable power supplies for portable devices and  
+the prototype should be relatively sturdy while its materials are held together by strong glue or screws.
 
-## Expanded Plans/Ideas
+- **Safety Features**: After interpreting the speech of the subject, provide a warning that is relayed as follows  
+'profanity, sensitive subjects, and material that aren't appropriate for the age provided will not be entertained'.
+  [ ] Therefore, the program must be able to store information related to age and must reference certain  
+  dictionaries that contain disallowed vocabulary that will trigger the warning
