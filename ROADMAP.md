@@ -1,16 +1,14 @@
 # Senior Independent Project ROADMAP
 
-## Chat-GPT Generated Suggestions
+## Interactive Storytelling Robot
 
-### Interactive Storytelling Robot
-
-#### Overview
+### Overview
 
 In this project, we aim to develop an interactive storytelling robot that engages children by narrating stories  
 and allowing them to interact with the narrative. The robot will utilize a combination of hardware and software  
 technologies to deliver personalized and immersive storytelling experiences.
 
-#### Technologies Required
+### Technologies Required
 
 - **Robotics Platform**: Select a suitable robotics platform (e.g., Raspberry Pi with motor controllers) to build   The physical structure of the storytelling robot.
   
@@ -35,7 +33,7 @@ to withstand interaction with children.
 - **Safety Features**: Implement safety features to protect children from potential hazards associated with  
 interacting with the robot.
 
-#### My Interpretation of Requirements
+### My Interpretation of Requirements
 
 - **Robotics Platform**: Motor controllers and Micro controllers that serve different purposes
 - [ ] [scripts folder](project/hardware/scripts/INDEX.md) will be updated to contain
@@ -50,5 +48,20 @@ the prototype should be relatively sturdy while its materials are held together 
 
 - **Safety Features**: After interpreting the speech of the subject, provide a warning that is relayed as follows  
 'profanity, sensitive subjects, and material that aren't appropriate for the age provided will not be entertained'.
-  [ ] Therefore, the program must be able to store information related to age and must reference certain  
+  - [ ] Therefore, the program must be able to store information related to age and must reference certain  
   dictionaries that contain disallowed vocabulary that will trigger the warning
+
+### Specifics in Development
+
+**Begin here...**
+
+## Website for the Robot
+
+### Purpose
+
+The website should be decently animated with few interactive components.The user should be able to view the  
+technologies used, understand my inspiration, and view the current state of the robot (as when it is initially  
+released it will be in its *prototype* phase). This website should be in constant development until the completion  
+or abandonment of said project.
+
+### Progress in Development
