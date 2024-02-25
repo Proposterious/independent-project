@@ -10,7 +10,8 @@ technologies to deliver personalized and immersive storytelling experiences.
 
 ### Technologies Required
 
-- **Robotics Platform**: Select a suitable robotics platform (e.g., Raspberry Pi with motor controllers) to build   The physical structure of the storytelling robot.
+- **Robotics Platform**: Select a suitable robotics platform (e.g., Raspberry Pi with motor controllers) to build  
+The physical structure of the storytelling robot.
   
 - **Speech Synthesis and Recognition**: Integrate speech synthesis for the robot to narrate stories and incorporate  
 speech recognition to enable verbal interaction with children.
@@ -59,7 +60,7 @@ the prototype should be relatively sturdy while its materials are held together 
 
 ### Purpose
 
-The website should be decently animated with few interactive components.The user should be able to view the  
+The website should be decently animated with few interactive components. The user should be able to view the  
 technologies used, understand my inspiration, and view the current state of the robot (as when it is initially  
 released it will be in its *prototype* phase). This website should be in constant development until the completion  
 or abandonment of said project.
