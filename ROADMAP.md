@@ -34,6 +34,8 @@ to withstand interaction with children.
 - **Safety Features**: Implement safety features to protect children from potential hazards associated with  
 interacting with the robot.
 
+***
+
 ### My Interpretation of Requirements
 
 - **Robotics Platform**: Motor controllers and Micro controllers that serve different purposes
@@ -54,7 +56,24 @@ the prototype should be relatively sturdy while its materials are held together 
 
 ### Specifics in Development
 
-**Begin here...**
+#### February 28, 2024 (Day 1)
+
+[OpenAI's Whisper](https://github.com/openai/whisper) and its dependencies are now accessible packages for my project.
+
+Steps Going Forward:
+
+1. Have my program interpret, produce, convert, and modify speech (.wav) files
+2. Find the best way to store user information. Most convenient would be locally onto the micro-controller's storage
+3. Store user information locally through JSON files (learn how to do this in Python3)
+
+Ideas:
+
+1. It would be complicated to allow the machine to listen while providing its response. Instead, produce an auditory  
+signal to show the machine has completed its response (perhaps as a not annoying beep noise).
+2. Figure out how to have the robot respond using my own laptop machine prior to running this on a micro-controller.
+
+***
+***
 
 ## Website for the Robot
 
