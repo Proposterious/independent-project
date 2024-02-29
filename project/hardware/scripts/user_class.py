@@ -12,4 +12,9 @@ class User:
 
     def grant_settings(self) -> dict:
         '''Lists out the User's settings'''
-        
+        return 'Your settings are as follows... {self.settings}'
+
+    def change_settings(self, key, value) -> dict:
+        '''Changes settings based on input'''
+        self.settings[key] = value
+        return 'Your settings are as follows... {self.settings}'
