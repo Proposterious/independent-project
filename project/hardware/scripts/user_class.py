@@ -10,6 +10,6 @@ class User:
         '''Welcomes the User'''
         return 'Welcome, {self.name}! Your recorded name is {self.age}'
 
-    def grant_settings(self) -> None:
+    def grant_settings(self) -> dict:
         '''Lists out the User's settings'''
         

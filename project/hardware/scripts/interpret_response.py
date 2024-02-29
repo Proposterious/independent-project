@@ -2,7 +2,11 @@
 import whisper
 
 model = whisper.load_model("base")
-model.transcribe("idioms.wav")
 
-def convert_speech(text) -> str:
-    text
+async def convert_speech(text) -> str:
+    """
+    handles speech-to-text conversion
+
+    text: path to audio file
+    """
+    text = await model.transcribe(text)

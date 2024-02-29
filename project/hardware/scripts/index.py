@@ -1,18 +1,15 @@
 '''Index File'''
-import user_class
-
-import create_user
-import check_user
+import introduction
 
 power: bool = True
 
 def start():
     '''sets up program'''
-    if check_user.askUser():
+    if introduction.ask_user():
         # replace to await database
         print("user exists")
     else:
-        create_user.createUser()
+        introduction.create_user()
 
     loop()
 
@@ -21,4 +18,5 @@ def loop() -> bool:
     while power:
         # run main program
         print("running program")
-        
+    
+    return False
