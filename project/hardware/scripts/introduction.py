@@ -60,10 +60,3 @@ def ask_user() -> bool:
 # Notes
 # - Replace bool(answer) with a way to check if verbal input
 # is a type of affirmation such as "yes", "correct", "we have", etc.
-
-# Global
-# Replace input() with a method that takes two arguments.
-# example: converse(robots_text, users_response)
-# Replace print() with verbal response
-# Check for profanity or inappropriate words for each response,
-# preferably within whichever function interprets the speech
