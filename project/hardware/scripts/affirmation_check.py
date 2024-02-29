@@ -30,11 +30,11 @@ no_responses = [
 def compare(text: str) -> str:
     """returns a str ('affirmative', 'negative', 'neither')"""
     for pos_response in yes_responses:
-        if pos_response in text:
+        if pos_response.lower() in text.lower():
             return 'affirmative'
 
     for neg_response in no_responses:
-        if neg_response in text:
+        if neg_response.lower() in text.lower():
             return 'negative'
 
     return 'neither'
