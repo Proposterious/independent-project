@@ -1,7 +1,7 @@
 """Checks for affirmation"""
 
 # defines constant variables
-yes_responses = [
+YES_RESPONSES = [
     "Affirmative",
     "Indeed",
     "Absolutely",
@@ -11,16 +11,20 @@ yes_responses = [
     "Of course",
     "Sure thing",
     "Yup",
-    "Yeah"
+    "Yeah",
+    "Yes",
+    "Yes we have"
 ]
 
-no_responses = [
+NO_RESPONSES = [
     "Negative",
     "No",
     "Nope",
+    "Nah",
     "Not at all",
     "Never",
     "Nuh-uh",
+    "We haven't",
     "Sorry, we haven't",
     "I don't think so",
     "Unfortunately not",
@@ -29,12 +33,15 @@ no_responses = [
 
 def compare(text: str) -> str:
     """returns a str ('affirmative', 'negative', 'neither')"""
-    for pos_response in yes_responses:
-        if pos_response.lower() in text.lower():
-            return 'affirmative'
 
-    for neg_response in no_responses:
-        if neg_response.lower() in text.lower():
+    for res in YES_RESPONSES:
+        if res.lower() in text.lower().split('.'):
+            return 'positive'
+
+    for res in NO_RESPONSES:
+        if res.lower() in text.lower().split('.'):
             return 'negative'
 
-    return 'neither'
+    print(text.lower().split('.'))
+    return "neither"
+

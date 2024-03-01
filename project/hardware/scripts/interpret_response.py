@@ -9,4 +9,5 @@ async def convert_speech(text) -> str:
 
     text: path to audio file
     """
+    
     text = await model.transcribe(text)
