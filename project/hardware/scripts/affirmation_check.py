@@ -44,4 +44,3 @@ def compare(text: str) -> str:
 
     print(text.lower().split('.'))
     return "neither"
-
