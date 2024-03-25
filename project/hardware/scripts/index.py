@@ -1,5 +1,11 @@
 '''Index File'''
+import sys
+import runtime
+
 import introduction
+import speech_handler
+import user_class
+
 
 power: bool = True
 
