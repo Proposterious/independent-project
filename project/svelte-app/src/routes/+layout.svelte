@@ -15,6 +15,7 @@
 <style>
 	* {
 		overflow: hidden;
+		overscroll-behavior-y: auto;
 	}
 	.app {
 		display: flex;
