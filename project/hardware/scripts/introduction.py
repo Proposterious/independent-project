@@ -32,7 +32,7 @@ def create_user() -> dict:
         "pref": input_pref,
         "settings": {
             "volume": 0,
-            "voice": 0
+            "voice": 50,
         }
     }
 
