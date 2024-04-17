@@ -1,0 +1,1 @@
+"""File utilities aka public functions for file verification/animation"""
