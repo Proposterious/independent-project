@@ -33,3 +33,13 @@ Make definite decision to use credits to access ChatGPT's 4.0 version which requ
 ## Long Paragraphs
 
 ### Monday April 15th, 2024
+
+Update 2024 SIP website... still requires edits.
+
+### Tuesday April 16th, 2024
+
+Continue updating 2024 SIP website.
+
+### Wednesday April 17th, 2024
+
+Make the switch to an openai assistant rather than chatbot. Allows `threads` and has more support for [instructions](https://platform.openai.com/docs/assistants/how-it-works).
