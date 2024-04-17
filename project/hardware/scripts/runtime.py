@@ -1,15 +1,9 @@
-"""Stores, Accesses Data that Exists in Runtime"""
+"""Takes Note of Major Changes during Runtime"""
 
-def store_text(username: str, text: str) -> None:
-    """Store text by username:str by username"""
-    print("got username ", username)
-    print("got text ", text)
+def timestamp():
+    # Notes time from program start
+    return
 
-    # write to stories.json
-    print("stored text in stories.json")
-
-def read_text(username: str) -> str:
-    """Return story:str by Username"""
-    # return text found in stories.json using the key 'username'
-    print("found text by username ", username)
-
+def end_program(text: str) -> str:
+    # Specifies what function ended the program
+    return text
