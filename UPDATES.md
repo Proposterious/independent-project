@@ -30,8 +30,6 @@ No progress made due to traveling.
 
 Make definite decision to use credits to access ChatGPT's 4.0 version which requires payment. This, in theory, should solve problems related to not receiving the tokens/api response.
 
-## Long Paragraphs
-
 ### Monday April 15th, 2024
 
 Update 2024 SIP website... still requires edits.
