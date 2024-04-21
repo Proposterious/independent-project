@@ -1,4 +1,5 @@
 """Text utilities aka public functions for text verification/manipulation"""
+
 def affirm(text: str) -> str:
     """Checks for affirmation"""
 
