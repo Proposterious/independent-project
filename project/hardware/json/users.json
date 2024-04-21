@@ -2,6 +2,7 @@
     "Noelle": {
         "name": "Noelle",
         "age": "6",
+        "assistant": "",
         "stories": {
             "dragon": {
                 "thread_id": "thread_LpPEqPSPPvl9E7AhWjfkUzdg",
