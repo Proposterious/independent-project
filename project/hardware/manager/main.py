@@ -1,32 +1,35 @@
 # Import necessary modules
+import sys
+import asyncio
 from data_manager import DataManager
 from conversation_manager import ConversationManager
 
-# Main function
-def main():
+# runs on startup
+async def main():
     """Initialize scripts, classes, hardware"""
-    # Initialize classes
-    conversation_manager = ConversationManager()
     data_manager = DataManager()
+    conversation_manager = ConversationManager(assistant="asst_tHhDGtl8tSJIVTrMd95yt9Uk")
+  
+    # Grab User Info
+    user_exists = await conversation_manager.introduce_user()
+    print("user_exists", user_exists)
+    if user_exists is True:
+        # Attempt to retrieve and update user data
+        user_name = await conversation_manager.get_name()
+        if bool(data_manager.set_data(user_name)) is True:
+            return "complete"
+    elif user_exists is False: # in-progress
+       conversation_manager.new_user()
+    else:
+        print("Could not determine if user exists, ", user_exists)
+        sys.exit()
 
-    # Main loop for the conversation
-    while True:
-        # Get user input
-        user_input = input("You: ")
-
-        # Send user input to conversation manager
-        response = conversation_manager.respond(user_input)
-
-        # Display response
-        print("Bot:", response)
-
-        new_message = [
-            {"role": "user", "content": user_input},
-            {"role": "system", "content": response}
-        ]
-        # Store conversation history
-        data_manager.save_conversation(new_message)
-
-# Entry point of the application
-if __name__ == "__main__":
-    main()
+# runs after setup
+async def loop():
+    """Serves as repetitive interaction loop"""
+    print("blah")
+# # Entry point of the application
+# if __name__ == "__main__":
+#     main()
+asyncio.run(main())
+asyncio.run(loop())
