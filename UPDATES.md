@@ -41,3 +41,19 @@ Continue updating 2024 SIP website.
 ### Wednesday April 17th, 2024
 
 Make the switch to an openai assistant rather than chatbot. Allows `threads` and has more support for [instructions](https://platform.openai.com/docs/assistants/how-it-works).
+
+### Thursday April 18th, 2024
+
+Successfully switch to openai assistant and review docs for how to develop and instruct my own custom assistant (aka the "Storyteller").
+
+### Friday April 19th, 2024
+
+Few optimizations but little progress made.
+
+### Saturday April 20th, 2024
+
+Update website and decide whether or not I am on pace to complete the project. Revelations made: I am technically on pace but hardware incompatibilities in addition to my lacking knowledge of file handling within environments leads me to believe I might have issues in setting up the Raspberry Pi 5.
+
+### Sunday April 21st, 2024
+
+Continue to update website as the deadline is the following day (April 22nd). Make vast improvements within the [scripts folder](project/hardware/manager/scripts) in addition to creating static sound files for a heightened experience with the chat assistant.
