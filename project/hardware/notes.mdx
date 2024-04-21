@@ -1,0 +1,29 @@
+# Senior Independent Project
+
+By Maddox Harper
+
+## Unorganized Notes
+
+### Record Audio to Python File
+
+1. Replicate [How to Record Audio in Python](https://www.youtube.com/watch?v=wE-122yZaCE)
+    - `recordSpeech(num: int) -> bool` return `True` or `False` depending on whether or not saving the file succeeded
+    - the param `num: int` should start at 1 and go up once per input given by the user during the session
+    - Similar to the video, the user should be able to give an input, perhaps a button, that tells the function they are done speaking
+2. Create function in its own file to figure out how to use WhisperAI and convert speech
+    - `convertSpeech(path: str) -> str` return obj of type str
+    - Optional: Watch [How to Convert Speech to Text](https://www.youtube.com/watch?v=HbY51mVKrcE)
+3. Create function in is own file to delete a file based on a parameter `delFile(path: str) -> bool`
+    - Return `True` or `False` depending on whether or not it succeeded
+4. Create function in its own file that sends the converted speech as text from <em>Point (2)</em> and send it to ChatGPT using an API key
+    - Said "API key" may not yet exist, find out how to retrieve it
+
+### Organize/Refactor Files (According to ChatGPT)
+
+Visit [Tailoring Languages to Ages](https://chat.openai.com/share/1a0add86-b0a5-4403-8e06-34d954f3957a)
+
+1. Rearrange files based on file structure provided by ChatGPT
+
+### TodoList
+
+1. Migrate from OpenAI's chatbot to OpenAI's assistant in `ConversationManager`
