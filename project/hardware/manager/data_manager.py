@@ -1,5 +1,5 @@
 """DataManager Class"""
-
+from utils.file_utils import read_users
 class DataManager:
     """Manages Data communication"""
     def __init__(self, data = None):
@@ -20,8 +20,19 @@ class DataManager:
         current_conversation = "Conversation:\n${conversation}\n"
         return current_user + current_runtime + current_conversation
 
+    def set_data(self, user_name: str):
+        """ Sets data based on 'user_name' """
+        users = read_users()
+        print(f"Updating Data from {self.data}...\n")
+        try:
+            self.data = users[user_name]
+            print(f"Successfully updated Data to {self.data}")
+            return True
+        except KeyError:
+            return False
+        
     def save_conversation(self, new_line: list) -> bool:
-        """Appends newLine to data.conversation Array"""
+        """ Appends newLine to data.conversation Array """
 
         length = len(self.data.conversation)
         self.data.conversation.append(new_line)
@@ -41,3 +52,4 @@ class DataManager:
         for x in range(1, latest):
             requested.append(self.data.conversation[-x])
         return requested
+
