@@ -1,1 +1,4 @@
 project/hardware/scripts/.env.local
+project/hardware/manager/test.py
+project/hardware/manager/.env
+*.pyc
