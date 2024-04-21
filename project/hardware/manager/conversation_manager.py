@@ -1,7 +1,6 @@
 """ConversationManager Class"""
 import os
 import time
-import openai
 import whisper
 from openai import OpenAI
 from pathlib import Path
@@ -25,47 +24,63 @@ class ConversationManager:
         self.assistant = assistant
         self.model_name = model_name
 
-    def create_speech(self, text, path: str) -> bool:
+    def beep(self):
+        """Play a beep to signal to user that the robot is finished speaking"""
+
+    async def create_speech(self, text, path: str, format_type: str) -> bool:
         """Convert text to speech and save to file with 'path'"""
         speech_file_path = PARENT_PATH / "sound" / path
-        response = client.audio.speech.create(
+        response = await client.audio.speech.create(
             model="tts-1",
             voice=self.voice,
             input=text,
-            response_format="wav"
+            response_format=format_type
         )
 
         response.stream_to_file(speech_file_path)
 
-        if response:
-            return True
-        else:
-            return False
-
     def transcribe_speech(self, path) -> str | bool:
         """Convert speech to text accessed with 'path'"""
-        speech_file_path = f"{Path(__file__)} / sound / {path}"
-        audio_file = open(speech_file_path, "rb")
-        transcription = openai.audio.transcriptions.create(
-            model="whisper-1",
-            format="wav",
-            file=audio_file
-        )
+        speech_file_path = f"{PARENT_PATH}\sound\{path}"
 
-        if transcription:
-            return transcription.text
-        return False
-    
-    def beep(self):
-        """Play a beep to signal to user that the robot is finished speaking"""
+        model = whisper.load_model("base")
+        result = model.transcribe(speech_file_path)
+
+        return result["text"]
+
     # Functions that Interact with User
-    def introduce_user(self):
+    async def introduce_user(self):
         """Introduce the User to VISoR"""
         introduce_path = os.path.dirname(__file__) + "\sound\introduceUser.mp3"
         playsound(introduce_path)
-        
-        
 
+        # Get user's response as transcription
+        await record_audio()
+        transcription = self.transcribe_speech("latestFile.wav")
+        affirmation = affirm(transcription)
+        return bool(affirmation == "positive")
+
+    async def get_name(self):
+        """Asks user for name and then awaits response"""
+        ask_user_path = f"{PARENT_PATH}\\sound\\askUser.mp3"
+        playsound(ask_user_path)
+
+        # Get user's response as transcription
+        await record_audio()
+        transcription = self.transcribe_speech("latestFile.wav")
+        
+        return transcription
+
+    async def new_user(self): # in-progress
+        """Introduce the User to VISoR"""
+        welcome_path = os.path.dirname(__file__) + "\sound\createUser.mp3"
+        playsound(welcome_path)
+
+        # Get user's response as transcription
+        await record_audio()
+        transcription = self.transcribe_speech("latestFile.wav")
+        
+        return transcription
 
     def respond(self, thread_id: str, user_input: str) -> str:
         """Generate response using OpenAI API"""
@@ -74,7 +89,7 @@ class ConversationManager:
         else:
             thread = client.beta.threads.create()
         try:
-             client.beta.threads.messages.create(
+            client.beta.threads.messages.create(
                 thread_id = thread_id,
                 role = "user",
                 content = user_input
@@ -99,3 +114,9 @@ class ConversationManager:
         )
 
         # self.create_speech(messages.data[0].content[-1].text.value, "latest_response.wav")
+
+conversation_manager = ConversationManager(assistant="asst_tHhDGtl8tSJIVTrMd95yt9Uk")
+
+welcome_speech = "Great! I would love to explain what Visor is. This Verbally Interactive Story Telling Robot, or Visor for short, allows you to build interactive stories using OpenAI's technologies. To begin, could you tell me your name?"
+
+conversation_manager.create_speech(welcome_speech, "firstUse.mp3", "mp3")
