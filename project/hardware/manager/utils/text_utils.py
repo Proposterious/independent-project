@@ -35,12 +35,14 @@ def affirm(text: str) -> str:
     ]
 
     for res in yes_responses:
-        if res.lower() in text.lower().split('.'):
+        if res.lower().strip() in text.lower().strip().split('.'):
+            print('positive')
             return 'positive'
 
     for res in no_responses:
-        if res.lower() in text.lower().split('.'):
+        if res.lower().strip() in text.lower().strip().split('.'):
+            print('negative')
             return 'negative'
 
-    print(text.lower().split('.'))
+    print(text.lower().split(' '))
     return "neither"

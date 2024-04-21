@@ -1,21 +1,25 @@
 """File utilities aka public functions for file verification/animation"""
 import wave
 import time
-import ffmpeg
-import pyaudio
-import keyboard
+import json
 import contextlib
 from pathlib import Path
 
-def record_audio():
+import ffmpeg
+import pyaudio
+import keyboard
+
+
+async def record_audio():
     """Record and Save Audio"""
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
 
     RATE = 44100
     CHUNK = 1024
-    OUTPUT_FILENAME = Path(__file__).parent / "sound" / "latestFile.wav"
+    OUTPUT_FILENAME = f"{Path(__file__).parent.parent}\sound\latestFile.wav"
 
+    print(OUTPUT_FILENAME)
     audio = pyaudio.PyAudio()
     stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
 
@@ -34,7 +38,7 @@ def record_audio():
         
         if keyboard.is_pressed('space'):
             print("stopping recording after a brief delay...")
-            time.sleep(0.2)
+            time.sleep(0.4)
             break
 
     stream.stop_stream()
@@ -49,6 +53,7 @@ def record_audio():
     waveFile.close()
 
 def find_length(file_path, file_type: str):
+    """Returns duration of an audio file"""
     if file_type == "wav":
         with contextlib.closing(wave.open(file_path,'r')) as f:
             frames = f.getnframes()
@@ -60,5 +65,10 @@ def find_length(file_path, file_type: str):
 
     return duration
 
-file_path = Path(__file__).parent / "sound" / "latestFile.wav"
-file_type = "wav"
+def read_users() -> dict:
+    """Returns Users from 'users.json' as dict"""
+    users_path = Path(__file__).parent.parent.parent / "json" / "users.json"
+
+    with open(users_path, "r") as json_file:
+        users = json.load(json_file)
+        return users
