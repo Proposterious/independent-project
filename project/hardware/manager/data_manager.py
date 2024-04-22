@@ -33,7 +33,6 @@ class DataManager:
         
     def save_conversation(self, new_line: list) -> bool:
         """ Appends newLine to data.conversation Array """
-
         length = len(self.data.conversation)
         self.data.conversation.append(new_line)
         print("Current Conversation: ", self.data.conversation)
@@ -43,10 +42,11 @@ class DataManager:
         return True # session successfully updated
 
     def get_conversation(self, latest = 0) -> list:
-        """Returns Entire or a Segment of the Conversation"""
+        """ Returns Entire or a Segment of the Conversation """
         # no param returns entire conversation
         if latest == 0:
             return self.data.conversation
+        
         # param returns segments of conversation
         requested = []
         for x in range(1, latest):
