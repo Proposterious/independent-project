@@ -27,10 +27,10 @@ class ConversationManager:
     def beep(self):
         """Play a beep to signal to user that the robot is finished speaking"""
 
-    async def create_speech(self, text, path: str, format_type: str) -> bool:
+    def create_speech(self, text, path: str, format_type: str) -> bool:
         """Convert text to speech and save to file with 'path'"""
         speech_file_path = PARENT_PATH / "sound" / path
-        response = await client.audio.speech.create(
+        response = client.audio.speech.create(
             model="tts-1",
             voice=self.voice,
             input=text,
@@ -68,19 +68,19 @@ class ConversationManager:
         # Get user's response as transcription
         await record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
-        
+     
         return transcription
 
     async def new_user(self): # in-progress
         """Introduce the User to VISoR"""
-        welcome_path = os.path.dirname(__file__) + "\sound\createUser.mp3"
+        welcome_path = os.path.dirname(__file__) + "\\sound\\createUser.mp3"
         playsound(welcome_path)
 
         # Get user's response as transcription
         await record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
-        
-        return transcription
+        user_name = transcription.lower().strip()
+        return user_name
 
     def respond(self, thread_id: str, user_input: str) -> str:
         """Generate response using OpenAI API"""

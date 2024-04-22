@@ -17,9 +17,11 @@ async def main():
         # Attempt to retrieve and update user data
         user_name = await conversation_manager.get_name()
         if bool(data_manager.set_data(user_name)) is True:
-            return "complete"
+            return
     elif user_exists is False: # in-progress
-       conversation_manager.new_user()
+       user_name = await conversation_manager.new_user()
+       if bool(data_manager.set_data(user_name)) is True:
+            return
     else:
         print("Could not determine if user exists, ", user_exists)
         sys.exit()
