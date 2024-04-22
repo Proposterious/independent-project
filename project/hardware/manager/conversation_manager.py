@@ -115,8 +115,3 @@ class ConversationManager:
 
         # self.create_speech(messages.data[0].content[-1].text.value, "latest_response.wav")
 
-conversation_manager = ConversationManager(assistant="asst_tHhDGtl8tSJIVTrMd95yt9Uk")
-
-welcome_speech = "Great! I would love to explain what Visor is. This Verbally Interactive Story Telling Robot, or Visor for short, allows you to build interactive stories using OpenAI's technologies. To begin, could you tell me your name?"
-
-conversation_manager.create_speech(welcome_speech, "firstUse.mp3", "mp3")
