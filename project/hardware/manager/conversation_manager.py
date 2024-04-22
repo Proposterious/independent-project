@@ -15,6 +15,7 @@ OPENAI_KEY = os.environ['OPENAI_API_KEY'] # grab api key
 client = OpenAI(api_key=OPENAI_KEY) # initialize openai connection
 
 PARENT_PATH = Path(__file__).parent
+FAILED_RES_PATH = f"{Path(__file__).parent}\\sound\\noResponse.mp3"
 
 class ConversationManager:
     """Manages User-ChatGPT communication"""
@@ -27,11 +28,11 @@ class ConversationManager:
     def beep(self):
         """Play a beep to signal to user that the robot is finished speaking"""
 
-    def create_speech(self, text, path: str, format_type: str) -> bool:
+    def create_speech(self, text, path: str, format_type: str) -> None:
         """Convert text to speech and save to file with 'path'"""
         speech_file_path = PARENT_PATH / "sound" / path
         response = client.audio.speech.create(
-            model="tts-1",
+            model="tts-1-hd",
             voice=self.voice,
             input=text,
             response_format=format_type
@@ -48,6 +49,10 @@ class ConversationManager:
 
         return result["text"]
 
+    async def failed_response(self):
+        playsound(FAILED_RES_PATH)
+        time.sleep(2)
+    
     # Functions that Interact with User
     async def introduce_user(self):
         """Introduce the User to VISoR"""
@@ -68,8 +73,8 @@ class ConversationManager:
         # Get user's response as transcription
         await record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
-     
-        return transcription
+        
+        return transcription.lower().strip()
 
     async def new_user(self): # in-progress
         """Introduce the User to VISoR"""
@@ -81,6 +86,24 @@ class ConversationManager:
         transcription = self.transcribe_speech("latestFile.wav")
         user_name = transcription.lower().strip()
         return user_name
+
+    async def begin_session(self) -> str:
+        """Ask user if they would like to begin the session"""
+        begin_session_path = os.path.dirname(__file__) + "\\sound\\beginSession.mp3"
+        playsound(begin_session_path)
+
+        # Get user's response as transcription
+        await record_audio()
+        transcription = self.transcribe_speech("latestFile.wav")
+        affirmation = affirm(transcription)
+   
+        if bool(affirmation == "positive"):
+            return "yes"
+        elif affirmation == "neither":
+            self.failed_response()
+            self.begin_session()
+        return "no"
+        # Get user's response as transcription
 
     def respond(self, thread_id: str, user_input: str) -> str:
         """Generate response using OpenAI API"""
