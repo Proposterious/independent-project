@@ -73,7 +73,7 @@ class ConversationManager:
 
     async def new_user(self): # in-progress
         """Introduce the User to VISoR"""
-        welcome_path = os.path.dirname(__file__) + "\\sound\\createUser.mp3"
+        welcome_path = os.path.dirname(__file__) + "\\sound\\firstUse.mp3"
         playsound(welcome_path)
 
         # Get user's response as transcription
