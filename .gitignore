@@ -2,3 +2,5 @@ project/hardware/scripts/.env.local
 project/hardware/manager/test.py
 project/hardware/manager/.env
 *.pyc
+project/hardware/manager/sound/latestFile.wav
+project/hardware/manager/utils/tempCodeRunnerFile.py
