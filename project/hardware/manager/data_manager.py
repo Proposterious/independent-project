@@ -1,6 +1,8 @@
 """DataManager Class"""
 import os
 import time
+import json
+from pathlib import Path
 from openai import OpenAI
 from dotenv import load_dotenv
 from utils.file_utils import read_users
@@ -38,7 +40,28 @@ class DataManager:
             return True
         except KeyError:
             return False
-    
+
+    def create_user(self, user_name: str) -> None:
+        """Creates User within 'users.json' as dict"""
+        
+        users_path = Path(__file__).parent.parent / "json" / "users.json"
+
+        new_data = {
+            user_name: {
+                "name": user_name,
+                "age": 6,
+                "voice": "nova",
+                "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
+                "stories": []
+            }
+        }
+        old_data = read_users()
+
+        old_data.update(new_data)
+
+        with open(users_path, "w") as json_file:
+            json.dump(old_data, json_file, indent=4)
+
     def save_conversation(self, new_line: list) -> bool:
         """ Appends newLine to data.conversation Array """
         length = len(self.data.conversation)
@@ -54,13 +77,13 @@ class DataManager:
         # no param returns entire conversation
         if latest == 0:
             return self.data.conversation
-        
+    
         # param returns segments of conversation
         requested = []
         for x in range(1, latest):
             requested.append(self.data.conversation[-x])
         return requested
-  
+
     async def manage_threads(self, action, thread: str = None, content: str = None):
         """ Handles CRUD actions for OpenAI thread objs """
         client = OpenAI(api_key=openai_api_Key) # initialize client
@@ -95,4 +118,3 @@ class DataManager:
             )
         else:
             print("Invalid action, No action taken")
-    
