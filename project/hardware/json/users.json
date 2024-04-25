@@ -1,13 +1,23 @@
 {
+    "maddox": {
+        "name": "maddox",
+        "age": 6,
+        "voice": "nova",
+        "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
+        "stories": []
+    },
     "noelle": {
         "name": "noelle",
         "age": 6,
-        "assistant": "",
-        "stories": {
-            "dragon": {
-                "thread_id": "thread_LpPEqPSPPvl9E7AhWjfkUzdg",
-                "content": ""
-            }
-        }
+        "voice": "nova",
+        "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
+        "stories": []
+    },
+    "": {
+        "name": "",
+        "age": 6,
+        "voice": "nova",
+        "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
+        "stories": []
     }
 }
