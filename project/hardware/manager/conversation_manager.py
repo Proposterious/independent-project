@@ -2,8 +2,8 @@
 import os
 import time
 import whisper
-from openai import OpenAI
 from pathlib import Path
+from openai import OpenAI
 from dotenv import load_dotenv
 from playsound import playsound
 from utils.text_utils import affirm
@@ -25,14 +25,14 @@ class ConversationManager:
         self.assistant = assistant
         self.model_name = model_name
 
-    def beep(self):
+    def beep(self): #in-progress
         """Play a beep to signal to user that the robot is finished speaking"""
 
     def create_speech(self, text, path: str, format_type: str) -> None:
         """Convert text to speech and save to file with 'path'"""
         speech_file_path = PARENT_PATH / "sound" / path
         response = client.audio.speech.create(
-            model="tts-1-hd",
+            model="tts-1",
             voice=self.voice,
             input=text,
             response_format=format_type
@@ -50,6 +50,7 @@ class ConversationManager:
         return result["text"]
 
     async def failed_response(self):
+        """ Alerts user that their request failed """
         playsound(FAILED_RES_PATH)
         time.sleep(2)
     
@@ -76,7 +77,7 @@ class ConversationManager:
         
         return transcription.lower().strip()
 
-    async def new_user(self): # in-progress
+    async def new_user(self):
         """Introduce the User to VISoR"""
         welcome_path = os.path.dirname(__file__) + "\\sound\\firstUse.mp3"
         playsound(welcome_path)
@@ -105,12 +106,39 @@ class ConversationManager:
         return "no"
         # Get user's response as transcription
 
-    def respond(self, thread_id: str, user_input: str) -> str:
+    async def prev_sessions(self, stories: list) -> str:
+        """ Return and return past sessions """
+        temp_path = f"{PARENT_PATH}\\sound\\prevStory.wav"
+        question = "I will list out stories from our previous sessions."
+        for story in range (0, len(stories)-1):
+            question += f"{story}) {stories[story].title}"
+            print(f"Found {stories[story]}")
+
+        await self.create_speech(question, temp_path, 'wav')
+        await record_audio()
+        transcription = self.transcribe_speech("latestFile.wav")
+        for res in transcription.lower().split():
+            try:
+                chosen_story = int(res)
+                return chosen_story
+            except ValueError:
+                pass
+
+        return chosen_story
+  
+    def user_response(self) -> str:
+        """ Gets user's input as transcription """
+        record_audio()
+        transcription = self.transcribe_speech("latestFile.wav")
+        return transcription
+
+    def assistant_response(self, user_input: str, thread_id: str) -> str:
         """Generate response using OpenAI API"""
         if thread_id:
             thread = client.beta.threads.retrieve(thread_id)
         else:
             thread = client.beta.threads.create()
+
         try:
             client.beta.threads.messages.create(
                 thread_id = thread_id,
@@ -130,11 +158,14 @@ class ConversationManager:
                 thread_id=thread_id,
                 run_id=run.id,
             )
-            time.sleep(0.25)
+            time.sleep(0.15)
 
         messages = client.beta.threads.messages.list(
             thread_id = thread.id
         )
 
-        # self.create_speech(messages.data[0].content[-1].text.value, "latest_response.wav")
+        self.create_speech(messages.data[0].content[-1].text.value, "latestFile.wav", "wav")
 
+        playsound(f"{PARENT_PATH}\\sound\\latestFile.wav")
+
+        return messages[-1].content[0].text.value
