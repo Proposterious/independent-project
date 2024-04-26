@@ -57,3 +57,19 @@ Update website and decide whether or not I am on pace to complete the project. R
 ### Sunday April 21st, 2024
 
 Continue to update website as the deadline is the following day (April 22nd). Make vast improvements within the [scripts folder](project/hardware/manager/scripts) in addition to creating static sound files for a heightened experience with the chat assistant.
+
+### Monday April 22nd, 2024
+
+Completely set up Raspberry Pi 5 with the Raspberry Pi OS, preferred onboard packages, and allow access through VNC (Virtual Network Connection). Research and understand how Raspberry OS (derived from Linux Debian OS) installs/handles commands.
+
+### Tuesday April 23rd, 2024
+
+Brainstorm how to best use the Raspberry Pi 5 when it would be stored inside the robot casing. VNC should handle most of these issues but an additional power source (battery packs) will be required to support motors and such.
+
+### Wednesday April 24th, 2024
+
+Get closer to completing all of the user-robot interaction related scripts in addition to figuring out which features will be excluded from the final product.
+
+### Thursday April 25th, 2024
+
+Decide the best course of action for building the casing of the robot. According to peers, the PIRL contains a 3d printer open for use, I will need to discuss with teachers to get a better understanding of 3d printing. Spent time sketching a detailed design prior to printing as well.
