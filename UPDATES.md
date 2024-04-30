@@ -73,3 +73,19 @@ Get closer to completing all of the user-robot interaction related scripts in ad
 ### Thursday April 25th, 2024
 
 Decide the best course of action for building the casing of the robot. According to peers, the PIRL contains a 3d printer open for use, I will need to discuss with teachers to get a better understanding of 3d printing. Spent time sketching a detailed design prior to printing as well.
+
+### Friday April 26th, 2024
+
+Discuss with Ms. Wortham about permission to 3d print. Research different avenues for building the doll with the instructions/layout provided by others as building one from scratch isn't feasible.
+
+### Saturday April 27th, 2024
+
+No progress made aka take a rest day.
+
+### Sunday April 28th, 2024
+
+Review past week in preparation for mentor meetings this week. Continue researching the materials needed in order to create a working doll in addition to whether or not it will have movement.
+
+### Monday April 29th, 2024
+
+Discuss with Mr. Goodman next steps and setbacks of my project. Receive advice from Mr. Lanier about building a humanoid robot in which the options appear to be either [InMoov](https://inmoov.fr) or an amalgamation of parts with files provided by [Instructables](https://instructables.com).
