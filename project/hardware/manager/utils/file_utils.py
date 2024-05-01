@@ -10,7 +10,7 @@ import pyaudio
 import keyboard
 
 
-async def record_audio():
+def record_audio():
     """Record and Save Audio"""
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
