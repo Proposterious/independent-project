@@ -4,10 +4,11 @@ import asyncio
 from data_manager import DataManager
 from conversation_manager import ConversationManager
 
+asst_str = "asst_tHhDGtl8tSJIVTrMd95yt9Uk"
 data_manager = DataManager() # initialize DataManager class
-conversation_manager = ConversationManager(assistant="asst_tHhDGtl8tSJIVTrMd95yt9Uk") # initialize ConversationManager class
+conversation_manager = ConversationManager(assistant=asst_str) # initialize ConversationManager class
 
-def loop(thread) -> None:
+def loop(thread = None) -> None:
     """Serves as repetitive interaction loop"""
     while True:
         user_input = conversation_manager.user_response()
@@ -18,9 +19,9 @@ def options(user_name: str) -> None:
     """Accesses and edits user options"""
     print(user_name)
 
-async def main() -> None:
+def main() -> None:
     """Initializes the program"""
-    user_exists: bool = await conversation_manager.introduce_user()
+    user_exists: bool = conversation_manager.introduce_user()
     # Create or find user then update session
     if user_exists is True:
         # Attempt to retrieve and update user data
@@ -31,7 +32,7 @@ async def main() -> None:
             print("Failed to update session")
             sys.exit()
     elif user_exists is False: # in-progress
-        user_name = await conversation_manager.new_user()
+        user_name = conversation_manager.new_user()
         data_manager.create_user(user_name)
         if bool(data_manager.set_data(user_name)) is True:
             print("Updated session")
@@ -43,7 +44,7 @@ async def main() -> None:
         sys.exit()
 
     # Send user into loop or options
-    begin_session = await conversation_manager.begin_session()
+    begin_session = conversation_manager.begin_session()
     if bool(begin_session == "yes"):
         if user_exists is True:
             prev_stories = data_manager.data.stories
@@ -51,7 +52,9 @@ async def main() -> None:
 
             thread: str = prev_stories[story_index].thread_id
             asyncio.run(loop(thread))
-    else:
+        else: # user_exists is False
+            asyncio.run(loop())
+    else: 
         asyncio.run(options(data_manager.data.name))
         # ask user if they would like to begin session
 
