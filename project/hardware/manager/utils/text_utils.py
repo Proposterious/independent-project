@@ -46,3 +46,8 @@ def affirm(text: str) -> str:
 
     print(text.lower().split(' '))
     return "neither"
+
+def remove_punc(text: str) -> str:
+    """Remove punctuation"""
+    char_map = str.maketrans("", "", ".,!")
+    return text.translate(char_map)
