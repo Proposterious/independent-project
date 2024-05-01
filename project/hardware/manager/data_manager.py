@@ -35,6 +35,7 @@ class DataManager:
         users = read_users()
         print(f"Updating Data from {self.data}...\n")
         try:
+            print("username", user_name)
             self.data = users[user_name]
             print(f"Successfully updated Data to {self.data}")
             return True
@@ -43,7 +44,7 @@ class DataManager:
 
     def create_user(self, user_name: str) -> None:
         """Creates User within 'users.json' as dict"""
-        
+
         users_path = Path(__file__).parent.parent / "json" / "users.json"
 
         new_data = {
@@ -55,12 +56,15 @@ class DataManager:
                 "stories": []
             }
         }
-        old_data = read_users()
 
-        old_data.update(new_data)
+        data = read_users()
 
+        data.update(new_data)
+
+        print(data)
+        
         with open(users_path, "w") as json_file:
-            json.dump(old_data, json_file, indent=4)
+            json.dump(data, json_file, indent=4)
 
     def save_conversation(self, new_line: list) -> bool:
         """ Appends newLine to data.conversation Array """
@@ -95,16 +99,17 @@ class DataManager:
                 thread_id = thread
             )
         elif action == "UPDATE" & thread != None: # update an existing thread
-            run = await client.beta.threads.runs.create(
+            run = client.beta.threads.runs.create(
                 thread_id = thread,
                 assistant_id = self.data.assistant
             )
-            while run.status in ("queued", "in_progress"):
+
+            while run.status == "queued" or run.status == "in_progress":
                 run = client.beta.threads.runs.retrieve(
                     thread_id=thread.id,
                     run_id=run.id,
                 )
-                time.sleep(0.2)
+                time.sleep(0.15)
             
             messages = client.beta.threads.messages.list(
                 thread_id = thread

@@ -49,52 +49,52 @@ class ConversationManager:
 
         return result["text"]
 
-    async def failed_response(self):
+    def failed_response(self):
         """ Alerts user that their request failed """
         playsound(FAILED_RES_PATH)
-        time.sleep(2)
-    
+   
     # Functions that Interact with User
-    async def introduce_user(self):
+    def introduce_user(self):
         """Introduce the User to VISoR"""
         introduce_path = os.path.dirname(__file__) + "\sound\introduceUser.mp3"
         playsound(introduce_path)
 
         # Get user's response as transcription
-        await record_audio()
+        record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
         affirmation = affirm(transcription)
         return bool(affirmation == "positive")
 
-    async def get_name(self):
+    def get_name(self):
         """Asks user for name and then awaits response"""
         ask_user_path = f"{PARENT_PATH}\\sound\\askUser.mp3"
         playsound(ask_user_path)
 
         # Get user's response as transcription
-        await record_audio()
+        record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
-        
+
+        print(transcription)
         return transcription.lower().strip()
 
-    async def new_user(self):
+    def new_user(self):
         """Introduce the User to VISoR"""
         welcome_path = os.path.dirname(__file__) + "\\sound\\firstUse.mp3"
         playsound(welcome_path)
 
         # Get user's response as transcription
-        await record_audio()
+        record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
         user_name = transcription.lower().strip()
         return user_name
 
-    async def begin_session(self) -> str:
+    def begin_session(self) -> str:
         """Ask user if they would like to begin the session"""
         begin_session_path = os.path.dirname(__file__) + "\\sound\\beginSession.mp3"
         playsound(begin_session_path)
 
         # Get user's response as transcription
-        await record_audio()
+        record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
         affirmation = affirm(transcription)
    
@@ -106,7 +106,7 @@ class ConversationManager:
         return "no"
         # Get user's response as transcription
 
-    async def prev_sessions(self, stories: list) -> str:
+    def prev_sessions(self, stories: list) -> str:
         """ Return and return past sessions """
         temp_path = f"{PARENT_PATH}\\sound\\prevStory.wav"
         question = "I will list out stories from our previous sessions."
@@ -114,8 +114,8 @@ class ConversationManager:
             question += f"{story}) {stories[story].title}"
             print(f"Found {stories[story]}")
 
-        await self.create_speech(question, temp_path, 'wav')
-        await record_audio()
+        self.create_speech(question, temp_path, 'wav')
+        record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
         for res in transcription.lower().split():
             try:
@@ -125,7 +125,7 @@ class ConversationManager:
                 pass
 
         return chosen_story
-  
+
     def user_response(self) -> str:
         """ Gets user's input as transcription """
         record_audio()
@@ -145,8 +145,9 @@ class ConversationManager:
                 role = "user",
                 content = user_input
             )
-        except Error as e: # pylint: disable=undefined-variable
+        except Exception as e: # pylint: disable=undefined-variable
             print(f"Received error {e}, Failure")
+            return
 
         run = client.beta.threads.runs.create(
             thread_id = thread_id,
