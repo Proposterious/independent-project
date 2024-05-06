@@ -10,6 +10,8 @@ conversation_manager = ConversationManager(assistant=asst_str) # initialize Conv
 
 def loop(thread = None) -> None:
     """Serves as repetitive interaction loop"""
+    if thread is None:
+        thread = data_manager.manage_threads("CREATE")
     while True:
         user_input = conversation_manager.user_response()
         response = conversation_manager.assistant_response(user_input, thread)
@@ -54,7 +56,7 @@ def main() -> None:
             asyncio.run(loop(thread))
         else: # user_exists is False
             asyncio.run(loop())
-    else: 
+    else:
         asyncio.run(options(data_manager.data.name))
         # ask user if they would like to begin session
 
