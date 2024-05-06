@@ -94,10 +94,12 @@ class DataManager:
 
         if action == "CREATE": # create new thread
             thread = client.beta.threads.create()
+            return thread
         elif action == "READ" & thread != None: # retrieve an existing thread
             thread = client.beta.threads.retrieve(
                 thread_id = thread
             )
+            return thread
         elif action == "UPDATE" & thread != None: # update an existing thread
             run = client.beta.threads.runs.create(
                 thread_id = thread,
@@ -116,10 +118,14 @@ class DataManager:
             )
             for message in reversed(messages.data):
                 print(message.role + " : " + message.content[0].text.value)
+        
+            return messages
     
         elif action == "DELETE" & content != None: # delete an existing thread
             thread = client.beta.threads.delete(
                 thread_id = thread
             )
+            return thread
         else:
             print("Invalid action, No action taken")
+            return None
