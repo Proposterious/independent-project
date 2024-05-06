@@ -132,7 +132,7 @@ class ConversationManager:
         transcription = self.transcribe_speech("latestFile.wav")
         return transcription
 
-    def assistant_response(self, user_input: str, thread_id: str) -> str:
+    def assistant_response(self, user_input: str, thread_id = None) -> str:
         """Generate response using OpenAI API"""
         if thread_id:
             thread = client.beta.threads.retrieve(thread_id)
