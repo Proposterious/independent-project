@@ -12,6 +12,9 @@ def loop(thread = None) -> None:
     """Serves as repetitive interaction loop"""
     if thread is None:
         thread = data_manager.manage_threads("CREATE")
+        conversation_manager.embark(thread)
+    else:
+        print("this should provide the user a summary of prev thread/story")
     while True:
         user_input = conversation_manager.user_response()
         response = conversation_manager.assistant_response(user_input, thread)
@@ -49,7 +52,7 @@ def main() -> None:
     begin_session = conversation_manager.begin_session()
     if bool(begin_session == "yes"):
         if user_exists is True:
-            prev_stories = data_manager.data.stories
+            prev_stories = data_manager.data['stories']
             story_index: int = conversation_manager.prev_sessions(prev_stories)
 
             thread: str = prev_stories[story_index].thread_id
