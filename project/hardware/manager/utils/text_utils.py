@@ -1,5 +1,10 @@
 """Text utilities aka public functions for text verification/manipulation"""
 
+def remove_punc(text: str) -> str:
+    """Remove punctuation"""
+    char_map = str.maketrans("", "", ".,!;:'")
+    return text.translate(char_map)
+
 def affirm(text: str) -> str:
     """Checks for affirmation"""
 
@@ -35,19 +40,14 @@ def affirm(text: str) -> str:
     ]
 
     for res in yes_responses:
-        if res.lower().strip() in text.lower().strip().split('.'):
+        if res.lower().strip() in remove_punc(text.lower()).split(' '):
             print('positive')
             return 'positive'
 
     for res in no_responses:
-        if res.lower().strip() in text.lower().strip().split('.'):
+        if res.lower().strip() in remove_punc(text.lower()).split(' '):
             print('negative')
             return 'negative'
 
     print(text.lower().split(' '))
     return "neither"
-
-def remove_punc(text: str) -> str:
-    """Remove punctuation"""
-    char_map = str.maketrans("", "", ".,!;:'")
-    return text.translate(char_map)
