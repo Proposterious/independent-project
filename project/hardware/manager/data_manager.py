@@ -53,17 +53,15 @@ class DataManager:
                 "age": 6,
                 "voice": "nova",
                 "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
-                "stories": []
+                "stories": {}
             }
         }
 
         data = read_users()
-
         data.update(new_data)
-
         print(data)
-        
-        with open(users_path, "w") as json_file:
+
+        with open(users_path, "w", encoding="utf-8") as json_file:
             json.dump(data, json_file, indent=4)
 
     def save_conversation(self, new_line: list) -> bool:

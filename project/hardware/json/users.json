@@ -1,23 +1,11 @@
-{
-    "maddox": {
-        "name": "maddox",
+{    
+    "test": {
+        "name": "tes",
         "age": 6,
         "voice": "nova",
         "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
-        "stories": []
-    },
-    "noelle": {
-        "name": "noelle",
-        "age": 6,
-        "voice": "nova",
-        "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
-        "stories": []
-    },
-    "": {
-        "name": "",
-        "age": 6,
-        "voice": "nova",
-        "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
-        "stories": []
+        "stories": {
+            "threadName": "threadStr"
+        }
     }
 }
