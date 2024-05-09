@@ -88,7 +88,7 @@ class DataManager:
             requested.append(self.data.conversation[-x])
         return requested
 
-    async def manage_threads(self, action, thread: str = None, content: str = None):
+    def manage_threads(self, action, thread: str = None, content: str = None):
         """ Handles CRUD actions for OpenAI thread objs """
         client = OpenAI(api_key=openai_api_Key) # initialize client
 
