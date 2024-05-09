@@ -118,3 +118,12 @@ Create an Arduino sketch file containing a basic layout of the code and structur
 
 Meet with Mr. Lanier to go over the practicality of creating a Jack-in-a-box toy within the given time period (7 days). The meeting provided several helpful ideas in addition to feedback regarding the program, the toy itself, and the presentation that will be taking place on May 18th. Assuming I am productive this week, it appears as though the compromise actually enhances the functionality of VISoR rather than hindering it.
 
+### Tuesday May 7th, 2024
+
+Take a "break" (prepare for meeting with SIP advisor Mr. Goodman) prior to continuing with the project. Create a clear understanding of what I should achieve prior to Wednesday May 15th so that time leading up to the deadline is well spent. Reschedule meeting with Gavin to take place Thursday evening.
+
+### Wednesday May 8th, 2024
+
+Meet with Mr. Goodman to explain setbacks, compromises, and a new goal to meet by the May 15th deadline. Discuss options that would best grab the audience's attention so that my project is not too heavily focused on the slideshow presentation but will instead have a good balance. Do some shopping for a USB mini speaker and USB hidden microphone.
+
+### Thursday May 9th, 2024
