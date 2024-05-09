@@ -5,6 +5,8 @@ import whisper
 from pathlib import Path
 from openai import OpenAI
 from dotenv import load_dotenv
+from pydub import AudioSegment
+from pydub.playback import play
 from playsound import playsound
 from utils.text_utils import affirm
 from utils.text_utils import remove_punc
@@ -15,6 +17,7 @@ load_dotenv() # bring env variables in for os
 OPENAI_KEY = os.environ['OPENAI_API_KEY'] # grab api key
 client = OpenAI(api_key=OPENAI_KEY) # initialize openai connection
 
+LATEST_PATH = os.path.dirname(__file__) + "\\sound\\latestFile.wav"
 PARENT_PATH = Path(__file__).parent
 FAILED_RES_PATH = f"{Path(__file__).parent}\\sound\\noResponse.mp3"
 
@@ -57,7 +60,7 @@ class ConversationManager:
     # Functions that Interact with User
     def introduce_user(self):
         """Introduce the User to VISoR"""
-        introduce_path = os.path.dirname(__file__) + "\sound\introduceUser.mp3"
+        introduce_path = os.path.dirname(__file__) + "\\sound\\introduceUser.mp3"
         playsound(introduce_path)
 
         # Get user's response as transcription
@@ -89,6 +92,17 @@ class ConversationManager:
         user_name = transcription.lower().strip()
         return remove_punc(user_name)
 
+    def embark(self, thread_id) -> None:
+        """Asks user to begin the story"""
+        embark_path = os.path.dirname(__file__) + "\\sound\\embark.mp3"
+        playsound(embark_path)
+        
+        # Get user's response as transcription
+        record_audio()
+        transcription = self.transcribe_speech("latestFile.wav")
+        # Initialize thread communication
+        self.assistant_response(transcription, thread_id)
+        
     def begin_session(self) -> str:
         """Ask user if they would like to begin the session"""
         begin_session_path = os.path.dirname(__file__) + "\\sound\\beginSession.mp3"
@@ -167,7 +181,16 @@ class ConversationManager:
         )
 
         self.create_speech(messages.data[0].content[-1].text.value, "latestFile.wav", "wav")
+        
+        # wait until file is complete to play sound
 
-        playsound(f"{PARENT_PATH}\\sound\\latestFile.wav")
-
-        return messages[-1].content[0].text.value
+        response = AudioSegment.from_wav(LATEST_PATH)
+        while True:
+            try:
+                time.sleep(3)
+                play(response)
+                break
+            except Exception as e:
+                print(f"Exception occurred as {e}")
+        
+        return messages.data[0].content[-1].text.value
