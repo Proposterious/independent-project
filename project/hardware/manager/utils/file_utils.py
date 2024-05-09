@@ -69,6 +69,6 @@ def read_users() -> dict:
     """Returns Users from 'users.json' as dict"""
     users_path = Path(__file__).parent.parent.parent / "json" / "users.json"
 
-    with open(users_path, "r") as json_file:
+    with open(users_path, "r", encoding="utf-8") as json_file:
         users = json.load(json_file)
         return users

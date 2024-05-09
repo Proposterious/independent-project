@@ -7,6 +7,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 from playsound import playsound
 from utils.text_utils import affirm
+from utils.text_utils import remove_punc
 from utils.file_utils import record_audio
 
 load_dotenv() # bring env variables in for os
@@ -75,7 +76,7 @@ class ConversationManager:
         transcription = self.transcribe_speech("latestFile.wav")
 
         print(transcription)
-        return transcription.lower().strip()
+        return remove_punc(transcription.lower().strip())
 
     def new_user(self):
         """Introduce the User to VISoR"""
@@ -86,7 +87,7 @@ class ConversationManager:
         record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
         user_name = transcription.lower().strip()
-        return user_name
+        return remove_punc(user_name)
 
     def begin_session(self) -> str:
         """Ask user if they would like to begin the session"""
