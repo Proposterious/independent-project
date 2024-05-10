@@ -38,7 +38,7 @@ def record_audio():
         
         if keyboard.is_pressed('space'):
             print("stopping recording after a brief delay...")
-            time.sleep(0.4)
+            time.sleep(0.1)
             break
 
     stream.stop_stream()
