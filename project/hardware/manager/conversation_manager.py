@@ -32,6 +32,11 @@ class ConversationManager:
     def beep(self): #in-progress
         """Play a beep to signal to user that the robot is finished speaking"""
 
+    def change_assistant(self, asst: str):
+        """Update object's assistant"""
+        self.assistant = asst
+        print("updated")
+
     def begin_communications(self, thread_id: str) -> str:
         """Alert Assistant to Begin 'intro' Protocol"""
         thread = client.beta.threads.retrieve(thread_id)
@@ -60,7 +65,6 @@ class ConversationManager:
 
         return messages.data[0].content[-1].text.value
 
-
     def create_speech(self, text, path: str, format_type: str) -> None:
         """Convert text to speech and save to file with 'path'"""
         speech_file_path = PARENT_PATH / "sound" / path
@@ -85,7 +89,7 @@ class ConversationManager:
     def failed_response(self):
         """ Alerts user that their request failed """
         playsound(FAILED_RES_PATH)
-   
+
     # Functions that Interact with User
     def introduce_user(self):
         """Introduce the User to VISoR"""
@@ -131,7 +135,7 @@ class ConversationManager:
         transcription = self.transcribe_speech("latestFile.wav")
         # Initialize thread communication
         self.assistant_response(transcription, thread_id)
-        
+  
     def begin_session(self) -> str:
         """Ask user if they would like to begin the session"""
         begin_session_path = os.path.dirname(__file__) + "\\sound\\beginSession.mp3"
