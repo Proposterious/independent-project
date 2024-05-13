@@ -6,6 +6,7 @@ from pathlib import Path
 from openai import OpenAI
 from dotenv import load_dotenv
 from utils.file_utils import read_users
+from utils.file_utils import get_specified_user
 
 load_dotenv() # bring in env variables
 openai_api_Key = os.environ["OPENAI_API_KEY"] # assign api key to constant var
@@ -17,11 +18,7 @@ class DataManager:
             self.data = data
 
         else: # provide structure to avoid errors
-            self.data = {
-                "user": "None",
-                "runtime": "N/A",
-                "conversation": []
-            }
+            self.data = get_specified_user("test")
 
     def __str__(self):
         print("Accessing data", self.data)
