@@ -122,6 +122,24 @@ class ConversationManager:
         transcription = self.transcribe_speech("latestFile.wav")
         user_name = transcription.lower().strip()
         return remove_punc(user_name)
+ 
+    def set_assistant(self):
+        """Set assistant's user on object"""
+        assign_path = os.path.dirname(__file__) + "\\sound\\assignAssistant.mp3"
+        playsound(assign_path)
+
+        # Get user's response as transcription
+        record_audio()
+        transcription = self.transcribe_speech("latestFile.wav")
+        res = transcription.lower().strip()
+
+        for word in range (0, res):
+            if word in ("one", "leading"):
+                return "leading"
+            elif word in ("two", "limited"):
+                return "limited"
+
+        return "failed"
 
     def embark(self, thread_id) -> None:
         """Asks user to begin the story"""
