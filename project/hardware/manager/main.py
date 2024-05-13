@@ -27,9 +27,16 @@ def loop(thread = None) -> None:
         response = conversation_manager.assistant_response(user_input, thread)
         print(response)
 
-def options(user_name: str) -> None:
+def options() -> None:
     """Accesses and edits user options"""
-    print(user_name)
+    # ask user for their name
+    user_name = conversation_manager.new_user()
+    # assign assistant to user
+    assistant = conversation_manager.set_assistant()
+    if assistant == "leading":
+        data_manager.create_user(user_name, STORYTELLERS["Leading"])
+    else:
+        data_manager.create_user(user_name, STORYTELLERS["Limited"])
 
 def main() -> None:
     """Initializes the program"""
@@ -44,8 +51,9 @@ def main() -> None:
             print("Failed to update session")
             sys.exit()
     elif user_exists is False: # in-progress
-        user_name = conversation_manager.new_user()
-        data_manager.create_user(user_name)
+        # set up user options
+        asyncio.run(options())
+
         if bool(data_manager.set_data(user_name)) is True:
             print("Updated session")
         else:
@@ -57,7 +65,7 @@ def main() -> None:
 
     # Send user into loop or options
     begin_session = conversation_manager.begin_session()
-    if bool(begin_session == "yes"):
+    if begin_session == "yes":
         if user_exists is True:
             prev_stories = data_manager.data['stories']
             story_index: int = conversation_manager.prev_sessions(prev_stories)
@@ -66,11 +74,10 @@ def main() -> None:
             conversation_manager.begin_communications(thread)
             asyncio.run(loop(thread))
         else: # user_exists is False
-            # in-progress: send user to options() to use storyteller limited or leading
             asyncio.run(loop())
-    else:
-        asyncio.run(options(data_manager.data.name))
-        # ask user if they would like to begin session
+    else: # send user into options
+        asyncio.run(options())
+        sys.exit()
 
 # Entry point of the application
 if __name__ == "__main__":

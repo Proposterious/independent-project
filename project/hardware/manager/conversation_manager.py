@@ -138,6 +138,8 @@ class ConversationManager:
                 return "leading"
             elif word in ("two", "limited"):
                 return "limited"
+            else:
+                print("neither leading nor limited")
 
         return "failed"
 

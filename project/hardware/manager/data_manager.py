@@ -41,7 +41,7 @@ class DataManager:
         except KeyError:
             return False
 
-    def create_user(self, user_name: str) -> None:
+    def create_user(self, user_name: str, assistant: str) -> None:
         """Creates User within 'users.json' as dict"""
 
         users_path = Path(__file__).parent.parent / "json" / "users.json"
@@ -51,7 +51,7 @@ class DataManager:
                 "name": user_name,
                 "age": 6,
                 "voice": "nova",
-                "assistant": {STORYTELLERS["Limited"]},
+                "assistant": assistant,
                 "stories": {}
             }
         }
