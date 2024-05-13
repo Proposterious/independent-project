@@ -72,3 +72,8 @@ def read_users() -> dict:
     with open(users_path, "r", encoding="utf-8") as json_file:
         users = json.load(json_file)
         return users
+
+def get_specified_user(username: str) -> dict:
+    """Returns Specified User as 'dict' object"""
+    users = read_users()
+    return users[username]
