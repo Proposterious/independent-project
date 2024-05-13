@@ -32,6 +32,35 @@ class ConversationManager:
     def beep(self): #in-progress
         """Play a beep to signal to user that the robot is finished speaking"""
 
+    def begin_communications(self, thread_id: str) -> str:
+        """Alert Assistant to Begin 'intro' Protocol"""
+        thread = client.beta.threads.retrieve(thread_id)
+
+        client.beta.threads.messages.create(
+            thread_id = thread_id,
+            role = "user",
+            content = "intro"
+        )
+
+        run = client.beta.threads.runs.create(
+            thread_id = thread_id,
+            assistant_id = self.assistant
+        )
+
+        while run.status in ("queued", "in_progress"):
+            run = client.beta.threads.runs.retrieve(
+                thread_id=thread_id,
+                run_id=run.id,
+            )
+            time.sleep(0.15)
+        
+        messages = client.beta.threads.messages.list(
+            thread_id = thread.id
+        )
+
+        return messages.data[0].content[-1].text.value
+
+
     def create_speech(self, text, path: str, format_type: str) -> None:
         """Convert text to speech and save to file with 'path'"""
         speech_file_path = PARENT_PATH / "sound" / path
@@ -193,4 +222,32 @@ class ConversationManager:
             except Exception as e:
                 print(f"Exception occurred as {e}")
         
+        return messages.data[0].content[-1].text.value
+
+    def end_communications(self, thread_id: str) -> str:
+        """Alert Assistants to Begin their Outro Protocol"""
+        thread = client.beta.threads.retrieve(thread_id)
+
+        client.beta.threads.messages.create(
+            thread_id = thread_id,
+            role = "user",
+            content = "outro"
+        )
+
+        run = client.beta.threads.runs.create(
+            thread_id = thread_id,
+            assistant_id = self.assistant
+        )
+
+        while run.status in ("queued", "in_progress"):
+            run = client.beta.threads.runs.retrieve(
+                thread_id=thread_id,
+                run_id=run.id,
+            )
+            time.sleep(0.15)
+        
+        messages = client.beta.threads.messages.list(
+            thread_id = thread.id
+        )
+
         return messages.data[0].content[-1].text.value
