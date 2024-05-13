@@ -51,3 +51,13 @@ def affirm(text: str) -> str:
 
     print(text.lower().split(' '))
     return "neither"
+
+def trigger_exit(text: str) -> bool:
+    """Returns True if User said 'quit' and False otherwise"""
+    res = remove_punc(text.lower()).split(' ')
+
+    for index, obj in enumerate(res):
+        if obj == 'quit':
+            print(f"{obj} found at index {index}")
+            return True
+    return False
