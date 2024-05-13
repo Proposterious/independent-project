@@ -29,13 +29,11 @@ class ConversationManager:
         self.assistant = assistant
         self.model_name = model_name
 
+    def __str__(self):
+        return str(self.__dict__)
+
     def beep(self): #in-progress
         """Play a beep to signal to user that the robot is finished speaking"""
-
-    def change_assistant(self, asst: str):
-        """Update object's assistant"""
-        self.assistant = asst
-        print("updated")
 
     def begin_communications(self, thread_id: str) -> str:
         """Alert Assistant to Begin 'intro' Protocol"""
