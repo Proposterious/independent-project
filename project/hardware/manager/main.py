@@ -2,12 +2,14 @@
 import sys
 import asyncio
 from utils.text_utils import trigger_exit
+from utils.file_utils import read_assistants
 from data_manager import DataManager
 from conversation_manager import ConversationManager
 
-asst_str = "asst_tHhDGtl8tSJIVTrMd95yt9Uk"
+STORYTELLERS = read_assistants()
+DEFAULT_STORYTELLER = STORYTELLERS["Limited"]
 data_manager = DataManager() # initialize DataManager class
-conversation_manager = ConversationManager(assistant=asst_str) # initialize ConversationManager class
+conversation_manager = ConversationManager(assistant=DEFAULT_STORYTELLER) # initialize ConversationManager class
 
 def loop(thread = None) -> None:
     """Serves as repetitive interaction loop"""
@@ -64,6 +66,7 @@ def main() -> None:
             conversation_manager.begin_communications(thread)
             asyncio.run(loop(thread))
         else: # user_exists is False
+            # in-progress: send user to options() to use storyteller limited or leading
             asyncio.run(loop())
     else:
         asyncio.run(options(data_manager.data.name))

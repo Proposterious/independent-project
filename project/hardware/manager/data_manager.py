@@ -7,9 +7,11 @@ from openai import OpenAI
 from dotenv import load_dotenv
 from utils.file_utils import read_users
 from utils.file_utils import get_specified_user
+from utils.file_utils import read_assistants
 
 load_dotenv() # bring in env variables
-openai_api_Key = os.environ["OPENAI_API_KEY"] # assign api key to constant var
+OPENAI_API_KEY = os.environ["OPENAI_API_KEY"] # assign api key to constant var
+STORYTELLERS = read_assistants()
 
 class DataManager:
     """Manages Data communication"""
@@ -49,7 +51,7 @@ class DataManager:
                 "name": user_name,
                 "age": 6,
                 "voice": "nova",
-                "assistant": "asst_tHhDGtl8tSJIVTrMd95yt9Uk",
+                "assistant": {STORYTELLERS["Limited"]},
                 "stories": {}
             }
         }
@@ -85,7 +87,7 @@ class DataManager:
 
     def manage_threads(self, action, thread: str = None, content: str = None):
         """ Handles CRUD actions for OpenAI thread objs """
-        client = OpenAI(api_key=openai_api_Key) # initialize client
+        client = OpenAI(api_key=OPENAI_API_KEY) # initialize client
 
         if action == "CREATE": # create new thread
             thread = client.beta.threads.create()

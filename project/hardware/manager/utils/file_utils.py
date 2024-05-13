@@ -77,3 +77,11 @@ def get_specified_user(username: str) -> dict:
     """Returns Specified User as 'dict' object"""
     users = read_users()
     return users[username]
+
+def read_assistants() -> dict:
+    """Returns Storytellers from 'storytellers.json' as dict"""
+    storytellers_path = Path(__file__).parent.parent.parent / "json" / "storytellers.json"
+
+    with open(storytellers_path, "r", encoding="utf-8") as json_file:
+        storytellers = json.load(json_file)
+        return storytellers
