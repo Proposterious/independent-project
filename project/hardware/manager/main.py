@@ -19,6 +19,7 @@ def loop(thread = None) -> None:
     while True:
         user_input = conversation_manager.user_response()
         if trigger_exit(user_input):
+            conversation_manager.end_communications(thread)
             break
 
         response = conversation_manager.assistant_response(user_input, thread)
