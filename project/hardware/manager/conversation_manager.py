@@ -238,7 +238,7 @@ class ConversationManager:
         response = AudioSegment.from_wav(LATEST_PATH)
         while True:
             try:
-                time.sleep(3)
+                time.sleep(.25)
                 play(response)
                 break
             except Exception as e:
