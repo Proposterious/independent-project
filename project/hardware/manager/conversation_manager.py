@@ -232,10 +232,10 @@ class ConversationManager:
         )
 
         self.create_speech(messages.data[0].content[-1].text.value, "latestFile.wav", "wav")
-        
+ 
         # wait until file is complete to play sound
-
         response = AudioSegment.from_wav(LATEST_PATH)
+
         while True:
             try:
                 time.sleep(.25)
