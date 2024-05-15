@@ -4,28 +4,33 @@ import asyncio
 from utils.text_utils import trigger_exit
 from utils.file_utils import read_assistants
 from data_manager import DataManager
+from music_manager import MusicManager
 from conversation_manager import ConversationManager
 
 STORYTELLERS = read_assistants()
 DEFAULT_STORYTELLER = STORYTELLERS["Limited"]
 data_manager = DataManager() # initialize DataManager class
+music_manager = MusicManager() # initialize MusicManager class
 conversation_manager = ConversationManager(assistant=DEFAULT_STORYTELLER) # initialize ConversationManager class
-
 def loop(thread = None) -> None:
     """Serves as repetitive interaction loop"""
     if thread is None:
         thread = data_manager.manage_threads("CREATE")
         conversation_manager.embark(thread)
-    else:
-        print("this should provide the user a summary of prev thread/story")
     while True:
+        # User responds
         user_input = conversation_manager.user_response()
         if trigger_exit(user_input):
             print(conversation_manager.end_communications(thread))
             break
 
+        # VISoR responds
         response = conversation_manager.assistant_response(user_input, thread)
-        print(response)
+
+        music_manager.musician_response(response)
+        
+
+
 
 def options() -> None:
     """Accesses and edits user options"""
