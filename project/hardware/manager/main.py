@@ -22,6 +22,7 @@ def loop(thread = None) -> None:
         user_input = conversation_manager.user_response()
         if trigger_exit(user_input):
             print(conversation_manager.end_communications(thread))
+            music_manager.quit()
             break
 
         # VISoR responds
