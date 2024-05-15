@@ -125,21 +125,20 @@ class ConversationManager:
  
     def set_assistant(self):
         """Set assistant's user on object"""
-        assign_path = os.path.dirname(__file__) + "\\sound\\assignAssistant.mp3"
+        assign_path = os.path.dirname(__file__) + "\\sound\\assignStoryteller.mp3"
         playsound(assign_path)
 
         # Get user's response as transcription
         record_audio()
         transcription = self.transcribe_speech("latestFile.wav")
-        res = transcription.lower().strip()
+        word = transcription.lower().strip()
 
-        for word in range (0, res):
-            if word in ("one", "leading"):
-                return "leading"
-            elif word in ("two", "limited"):
-                return "limited"
-            else:
-                print("neither leading nor limited")
+        if word in ("one", "leading"):
+            return "leading"
+        elif word in ("two", "limited"):
+            return "limited"
+        else:
+            print("neither leading nor limited")
 
         return "failed"
 
