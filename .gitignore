@@ -5,3 +5,4 @@ project/hardware/manager/.env
 project/hardware/json/storytellers.json
 project/hardware/manager/sound/latestFile.wav
 project/hardware/manager/utils/tempCodeRunnerFile.py
+project/hardware/manager/sound/music/*
