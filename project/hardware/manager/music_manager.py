@@ -71,13 +71,15 @@ class MusicManager:
 
         # update ref w/ new message
         self.ref(messages.data[0].content[-1].text.value)
- 
+
     def run(self):
         """loop main method"""
         current_song = None
         while True:
             with self.lock:
-                if current_song != self.ref:
+                if self.ref == "quit":
+                    return
+                elif current_song != self.ref:
                     # stop music if playing
                     try:
                         self.play_obj.stop()
@@ -89,3 +91,9 @@ class MusicManager:
                     file = AudioSegment.from_mp3(file = MUSIC_PATH + self.ref)
                     self.play_obj = playback._play_with_simpleaudio(file)
                     print("changed playback object")
+
+    def quit(self):
+        """terminate MusicManager"""
+        self.ref = "quit"
+        self.thread.join()
+        print("ended MusicManager")
